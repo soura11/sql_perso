@@ -1,0 +1,22 @@
+CREATE TABLE Produit(
+id int primary key,
+designation varchar(30) default 'Doe',
+prix_unitaire int unique not null,
+quantité_en_stock int unique not null
+);
+
+CREATE TABLE Commande(
+id int primary key,
+date_commande int
+);
+
+CREATE TABLE Produit_Commande(
+id int primary key,
+idcommande int unique not null,
+idproduit int unique not null,
+quantité_commande int unique not null
+);
+
+ALTER TABLE Produit_Commande
+ADD CONSTRAINT fk_vehicule_personne FOREIGN KEY (num_proprietaire) REFERENCES personne(num);
+

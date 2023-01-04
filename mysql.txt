@@ -1,0 +1,84 @@
+
+// Creation d'une table
+CREATE TABLE personne (
+num int primary key,
+nom varchar(30) default 'Doe',
+prenom varchar(30) unique not null,
+age int check (age >= 0 and age < 150)
+);
+
+// Creation d'une table
+CREATE TABLE vehicule (
+id int primary key,
+couleur varchar(30) ,
+marque varchar(30) ,
+num_proprietaire int,
+FOREIGN KEY (num_proprietaire) REFERENCES personne(num)
+);
+
+// supprimer une colonne
+ALTER TABLE personne
+DROP COLUMN age;
+
+// ajouter une colonne
+ALTER TABLE personne
+ADD COLUMN genre char(1);
+
+// ajouter en choisissant un ordre
+ALTER TABLE personne
+ADD COLUMN ville varchar(30)AFTER prenom;
+
+// ajouter une clé primaire
+ALTER TABLE vehicule
+DROP PRIMARY KEY;
+
+// modifié une colonne en ajoutant une contrainte (check)
+ALTER TABLE personne
+MODIFY COLUMN genre char(1) check (genre = 'H' or genre = 'F');
+
+// ajouter une clé primaire
+ALTER TABLE vehicule
+ADD CONSTRAINT pk_vehicule PRIMARY KEY (id);
+
+// supprimer une clé étrangère
+ALTER TABLE vehicule
+DROP FOREIGN KEY vehicule_ibfk_1;
+
+// ajouter une clé étrangère et référance à une table
+ALTER TABLE vehicule
+ADD CONSTRAINT fk_vehicule_personne FOREIGN KEY (num_proprietaire) REFERENCES personne(num);
+
+// supprimer/enlever une contrainte
+ALTER TABLE personne
+DROP CONSTRAINT personne_chk_1;
+
+// renommer une table
+RENAME TABLE personne TO person;
+
+// ajouter un ou des éléments dans une contrainte 
+ALTER TABLE person
+ADD CONSTRAINT chk_personne_age check (genre = 'H' or genre = 'F');
+
+// ajouter deux contraintes dans une ligne
+ALTER TABLE person
+ADD CONSTRAINT chk_personne_age check ((genre = 'H' or genre = 'F')and (ville = 'Paris' or ville = 'Marseille'));
+
+// renommer une colonne
+ALTER TABLE vehicule
+CHANGE marque modele varchar(30);
+
+// auto incrementer 
+ALTER TABLE vehicule
+MODIFY COLUMN id int AUTO_INCREMENT;
+
+
+si clé étrangère supprimer la contrainte
+puis auto increment et rajouter la contrainte
+ALTER TABLE vehicule
+DROP CONSTRAINT chk_personne_age; 
+
+// auto incrementer 
+ALTER TABLE person
+MODIFY COLUMN num int AUTO_INCREMENT;
+
+
